@@ -45,7 +45,7 @@ permissao:
 	docker compose exec app chmod -R 777 /var/www/storage/framework/views/
 	docker compose exec app chmod -R 777 /var/www/storage/framework/cache/
 	docker compose exec app chmod -R 777 /var/www/storage/logs/
-	docker compose exec app chmod -R 777 /var/www/database/database.sqlite
+	docker compose exec app chmod -R 664 /var/www/database/database.sqlite
 
 key:
 	docker compose exec app php artisan key:generate

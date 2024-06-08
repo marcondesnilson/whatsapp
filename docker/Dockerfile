@@ -51,11 +51,12 @@ RUN docker-php-ext-install dom
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install curl
+RUN docker-php-ext-install pdo pdo_sqlite
 
 #Install Redis
 
-RUN pecl install redis
-RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+#RUN pecl install redis
+#RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 # Timezone
 
 RUN echo "date.timezone=America/Sao_Paulo" > /usr/local/etc/php/conf.d/timezone_luanda.ini
