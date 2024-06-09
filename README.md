@@ -1,10 +1,10 @@
-# Tabela para calculo nutricional
+# Tabela para cálculo nutricional
 
 ## Start projeto
-após o start, o bando iniciará e já estara conectado.
+após o start, o bando iniciará e já estará conectado.
 
 ```
 make up
 ```
 
-projeto feito em laravel e mysql 
+projeto feito em laravel e MySql
