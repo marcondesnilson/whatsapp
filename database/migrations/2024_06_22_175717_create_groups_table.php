@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ingredientes', function (Blueprint $table) {
-            $table->bigInteger('id')->autoIncrement();
-            $table->bigInteger('alimento_id');
-            $table->float('quantidade');
+        Schema::create('groups', function (Blueprint $table) {
+            $table->uuid('id')->unique()->primary();
+            $table->string('name', 100);
+            $table->text('description')->nullable();
+            $table->integer('number_of_members')->default(0);
+            $table->integer('number_of_messages')->default(0);
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('alimento_id')->references('id')->on('alimentos');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ingredientes');
+        Schema::dropIfExists('groups');
     }
 };

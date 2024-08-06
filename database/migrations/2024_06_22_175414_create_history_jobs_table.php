@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alimentos', function (Blueprint $table) {
+        Schema::create('history_jobs', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
-            $table->string('nome');
-            $table->float('calorias')->nullable();
-            $table->float('proteinas')->nullable();
-            $table->float('carboidratos')->nullable();
-            $table->float('gorduras')->nullable();
+            $table->string('queue');
+            $table->json('dados');
+            $table->dateTime('reserved_at')->nullable();
+            $table->dateTime('start_at')->nullable();
+            $table->dateTime('finish_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alimentos');
+        Schema::dropIfExists('history_jobs');
     }
 };

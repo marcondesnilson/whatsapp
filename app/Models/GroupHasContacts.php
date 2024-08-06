@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Ingrediente extends Model
+class GroupHasContacts extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'alimento_id',
-        'quantidade',
+        'id',
+        'group_id',
+        'contact_id',
+        'isAdmin',
+        'isSuperAdmin',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
-
-    public function alimento()
-    {
-        return $this->belongsTo(Alimento::class);
-    }
 }
