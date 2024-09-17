@@ -36,6 +36,7 @@ class OnMessageJob extends BaseJob
 
             $chat_uuid = $this->chat($contact_id);
 
+            $this->clearChat($chat_uuid);
             $type = $this->type($contato);
 
             $datatime = $this->datatime($this->dados['t']);
@@ -263,6 +264,22 @@ class OnMessageJob extends BaseJob
                     Log::info('A URL já existe no arquivo.');
                 }
             }
+        } catch (\Throwable $e) {
+            logError($e);
+        }
+    }
+
+    private function clearChat($chat_uuid)
+    {
+        try {
+            $dados = array(
+                'session' => $this->dados['session'],
+                'chat_uuid' => $chat_uuid
+            );
+            $historyJobsUuid = app('App\Http\Controllers\util\HistoryJobsUtil')
+                ->create('ClearChatJob', $dados);
+            ClearChatJob::dispatch($historyJobsUuid, $dados)
+            ->onQueue('ClearChatJob');
         } catch (\Throwable $e) {
             logError($e);
         }

@@ -519,6 +519,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Http\\Controllers\\WebhookController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebhookController.php',
         'App\\Http\\Controllers\\teste' => __DIR__ . '/../..' . '/app/Http/Controllers/teste.php',
         'App\\Http\\Controllers\\util\\HistoryJobsUtil' => __DIR__ . '/../..' . '/app/Http/Controllers/util/HistoryJobsUtil.php',
+        'App\\Http\\Middleware\\ThrottleQueue' => __DIR__ . '/../..' . '/app/Http/Middleware/ThrottleQueue.php',
         'App\\Jobs\\BaseJob' => __DIR__ . '/../..' . '/app/Jobs/BaseJob.php',
         'App\\Jobs\\CountMessageJob' => __DIR__ . '/../..' . '/app/Jobs/CountMessageJob.php',
         'App\\Jobs\\GroupMemberAddJob' => __DIR__ . '/../..' . '/app/Jobs/GroupMemberAddJob.php',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ClearChatJob;
 use Illuminate\Http\Request;
 use App\Jobs\ListarAllChatsJobs;
 use App\Jobs\GroupMemberTransferJob;
@@ -19,21 +20,13 @@ class teste extends Controller
         // JSON string
 
         $dados = array(
-            'session' => '556993718498',
-            'group_in' => '120363038757400641',
-            'group_out' => '120363040159954276'
+            'session' => $this->dados['session'],
+            'chat_uuid' => 'a7587bbd-82be-44b8-ace2-1002f3eea09a'
         );
         $historyJobsUuid = app('App\Http\Controllers\util\HistoryJobsUtil')
-            ->create('GroupMemberTransferJob', $dados);
-            
-        $job = new GroupMemberTransferJob($historyJobsUuid, $dados);
-
-        // Executa a job diretamente
-        $job->handle();
-        /* GroupMemberTransferJob::dispatch($historyJobsUuid, $dados)
-            ->onQueue('GroupMemberTransferJob'); */
-
-        //////////////////////////////////////////
+            ->create('ClearChatJob', $dados);
+        ClearChatJob::dispatch($historyJobsUuid, $dados)
+        ->onQueue('ClearChatJob');
 
     }
 }

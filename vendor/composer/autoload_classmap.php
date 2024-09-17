@@ -11,6 +11,7 @@ return array(
     'App\\Http\\Controllers\\WebhookController' => $baseDir . '/app/Http/Controllers/WebhookController.php',
     'App\\Http\\Controllers\\teste' => $baseDir . '/app/Http/Controllers/teste.php',
     'App\\Http\\Controllers\\util\\HistoryJobsUtil' => $baseDir . '/app/Http/Controllers/util/HistoryJobsUtil.php',
+    'App\\Http\\Middleware\\ThrottleQueue' => $baseDir . '/app/Http/Middleware/ThrottleQueue.php',
     'App\\Jobs\\BaseJob' => $baseDir . '/app/Jobs/BaseJob.php',
     'App\\Jobs\\CountMessageJob' => $baseDir . '/app/Jobs/CountMessageJob.php',
     'App\\Jobs\\GroupMemberAddJob' => $baseDir . '/app/Jobs/GroupMemberAddJob.php',

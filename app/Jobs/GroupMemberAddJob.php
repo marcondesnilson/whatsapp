@@ -2,12 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Jobs\Middleware\RateLimited;
 use App\Models\Chat;
 use App\Models\Contact;
 use App\Models\Group;
 use App\Models\GroupHasContacts;
+use App\Models\HistoryJobs;
 use App\Models\SessionServer;
+use Exception;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
@@ -22,13 +23,15 @@ class GroupMemberAddJob extends BaseJob
         parent::__construct($historyJobsUuid);
         $this->dados = $dados;
     }
-    public function middleware()
-    {
-        return [new RateLimited];
-    }
+
     protected function executeJob()
     {
         try {
+            $attempts = $this->adiar();
+            if ($attempts['status'] == 'attempts') {
+                return $attempts;
+            }
+
             $addMembers = $this->addMemberGroup();
             if ($addMembers['status'] == 'error') {
                 return $addMembers;
@@ -65,12 +68,14 @@ class GroupMemberAddJob extends BaseJob
             ));
 
             $response = curl_exec($curl);
-
+            $responseData = json_decode($response, true);
+            if ($responseData['status'] ?? false == 'Error') {
+                throw new Exception('Error from API: ' . $responseData['response']['message']);
+            }
             curl_close($curl);
             $data = json_decode($response, true);
             $result = $data['response']['result'][0][$this->dados['contact_id'] . '@c.us'] ?? array();
 
-            Log::info($result);
             if ($result['code'] == 200) {
                 $this->insertContact();
                 return array(
@@ -101,6 +106,30 @@ class GroupMemberAddJob extends BaseJob
                         'deleted_at' => null,
                     ]
                 );
+        } catch (\Throwable $e) {
+            logError($e);
+            throw $e;
+        }
+    }
+
+    private function adiar()
+    {
+        try {
+            $time = date('Y-m-d H:i');
+            $exists = HistoryJobs::where('queue', 'GroupMemberAddJob')
+                ->where('finish_at', 'like', "%{$time}%")
+                ->exists();
+
+            if ($exists) {
+                return array(
+                    'status' => 'attempts',
+                    'message' => rand(30, 300)
+                );
+            } else {
+                return array(
+                    'status' => 'success'
+                );
+            }
         } catch (\Throwable $e) {
             logError($e);
             throw $e;

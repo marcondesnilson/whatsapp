@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\HistoryJobs;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 abstract class BaseJob implements ShouldQueue
@@ -72,18 +73,22 @@ abstract class BaseJob implements ShouldQueue
     {
         try {
             $historyJobs = HistoryJobs::where('uuid', $this->historyJobsUuid)->first();
-            if ($result['status'] ?? false == 'error') {
+            $status = $result['status'] ?? 'success';
+            if ($status == 'error') {
                 $finishTime = now();
                 $executionTime = $startTime->diffInMilliseconds($finishTime);
-
-                // Atualiza o status para "failed" e salva o tempo de execução e espera
                 $historyJobs->status = 'failed';
                 $historyJobs->error_message = $result['message'];
                 $historyJobs->finish_at = $finishTime;
                 $historyJobs->execution_time = $executionTime;
                 $historyJobs->save();
-            } else if($result['status'] ?? false == 'delete') {
+            } else if ($status == 'delete') {
                 HistoryJobs::where('uuid', $this->historyJobsUuid)->delete();
+            } else if ($status == 'attempts') {
+                $attempts = intval($result['message']);
+                $historyJobs->status = 'attempts';
+                $historyJobs->save();
+                return $this->release($attempts);
             } else {
                 // Calcula o tempo de execução
                 $finishTime = now();
@@ -96,6 +101,20 @@ abstract class BaseJob implements ShouldQueue
                 $historyJobs->error_message = null;
                 $historyJobs->save();
             }
+        } catch (\Throwable $e) {
+            logError($e);
+        }
+    }
+
+    public function failed(Exception $exception)
+    {
+        try {
+            // Lógica de tratamento quando o job falha após todas as tentativas
+            // Exemplo: Registrar log, enviar notificação, etc.
+            Log::error('Job failed after maximum attempts.', [
+                'exception' => $exception,
+                'job' => 'SendMessageJob',
+            ]);
         } catch (\Throwable $e) {
             logError($e);
         }
