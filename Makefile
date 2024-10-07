@@ -1,4 +1,4 @@
-IMAGE_NAME = "whatsapp"
+IMAGE_NAME = "whatsapp_app"
 
 up: start composer migrate limpar-cache permissao key pm2-start
 

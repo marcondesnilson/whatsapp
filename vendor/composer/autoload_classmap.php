@@ -13,6 +13,7 @@ return array(
     'App\\Http\\Controllers\\util\\HistoryJobsUtil' => $baseDir . '/app/Http/Controllers/util/HistoryJobsUtil.php',
     'App\\Http\\Middleware\\ThrottleQueue' => $baseDir . '/app/Http/Middleware/ThrottleQueue.php',
     'App\\Jobs\\BaseJob' => $baseDir . '/app/Jobs/BaseJob.php',
+    'App\\Jobs\\ClearChatJob' => $baseDir . '/app/Jobs/ClearChatJob.php',
     'App\\Jobs\\CountMessageJob' => $baseDir . '/app/Jobs/CountMessageJob.php',
     'App\\Jobs\\GroupMemberAddJob' => $baseDir . '/app/Jobs/GroupMemberAddJob.php',
     'App\\Jobs\\GroupMemberDeleteJob' => $baseDir . '/app/Jobs/GroupMemberDeleteJob.php',

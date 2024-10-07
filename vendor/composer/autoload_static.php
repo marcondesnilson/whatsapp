@@ -521,6 +521,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Http\\Controllers\\util\\HistoryJobsUtil' => __DIR__ . '/../..' . '/app/Http/Controllers/util/HistoryJobsUtil.php',
         'App\\Http\\Middleware\\ThrottleQueue' => __DIR__ . '/../..' . '/app/Http/Middleware/ThrottleQueue.php',
         'App\\Jobs\\BaseJob' => __DIR__ . '/../..' . '/app/Jobs/BaseJob.php',
+        'App\\Jobs\\ClearChatJob' => __DIR__ . '/../..' . '/app/Jobs/ClearChatJob.php',
         'App\\Jobs\\CountMessageJob' => __DIR__ . '/../..' . '/app/Jobs/CountMessageJob.php',
         'App\\Jobs\\GroupMemberAddJob' => __DIR__ . '/../..' . '/app/Jobs/GroupMemberAddJob.php',
         'App\\Jobs\\GroupMemberDeleteJob' => __DIR__ . '/../..' . '/app/Jobs/GroupMemberDeleteJob.php',

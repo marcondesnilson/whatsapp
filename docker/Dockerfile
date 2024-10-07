@@ -90,4 +90,8 @@ USER root
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
-CMD ["php-fpm"]
+
+#START
+COPY start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+CMD ["sh", "/usr/local/bin/start.sh"]
