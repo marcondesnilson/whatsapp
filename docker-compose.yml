@@ -37,7 +37,7 @@ services:
       - '3307:3306'
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_DATABASE: 'tabela'
+      MYSQL_DATABASE: 'whatsapp'
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
       MYSQL_OPTIONS: "--sort-buffer-size=1024M"  # Ajuste conforme necessário
     volumes:
