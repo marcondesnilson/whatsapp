@@ -56,7 +56,7 @@ class SendMessageJob extends BaseJob
             ));
 
             $response = curl_exec($curl);
-
+            Log::info($response);
             curl_close($curl);
             /* echo $response; */
         } catch (\Throwable $e) {

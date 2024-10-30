@@ -36,7 +36,7 @@ class OnMessageJob extends BaseJob
 
             $chat_uuid = $this->chat($contact_id);
 
-            $this->clearChat($chat_uuid);
+            //$this->clearChat($chat_uuid);
             $type = $this->type($contato);
 
             $datatime = $this->datatime($this->dados['t']);
@@ -269,7 +269,7 @@ class OnMessageJob extends BaseJob
         }
     }
 
-    private function clearChat($chat_uuid)
+    private function clearCha7t($chat_uuid)
     {
         try {
             $dados = array(
