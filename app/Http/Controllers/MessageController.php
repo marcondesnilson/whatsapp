@@ -24,7 +24,7 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         try {
-            return $dados = $request->all();
+            $dados = $request->all();
             Log::info('dados: ' . json_encode($dados));
             $historyJobsUuid = app('App\Http\Controllers\util\HistoryJobsUtil')
                 ->create('SendMessageJob', $dados);
