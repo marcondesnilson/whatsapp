@@ -43,9 +43,9 @@ class SendMessageJob extends BaseJob
                 'isGroup' => $this->dados['isGroup'],
             ];
 
-            Log::info('dados: ' . json_encode($this->dados));
+            //Log::info('dados: ' . json_encode($this->dados));
 
-            Log::info('body: ' . json_encode($body));
+            //Log::info('body: ' . json_encode($body));
             curl_setopt_array($curl, array(
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
@@ -63,7 +63,7 @@ class SendMessageJob extends BaseJob
             ));
 
             $response = curl_exec($curl);
-            Log::info($response);
+            //Log::info($response);
 
             curl_close($curl);
 

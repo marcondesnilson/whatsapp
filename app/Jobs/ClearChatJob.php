@@ -47,7 +47,7 @@ class ClearChatJob extends BaseJob
 
         $messages > 100 ? $dados['clear'] = true : $dados['clear'] = false;
 
-        Log::info('Chat: ' . $chat->uuid . ' - Messages: ' . $messages);
+        //Log::info('Chat: ' . $chat->uuid . ' - Messages: ' . $messages);
 
         if ($chat['group_id'] != null) {
             $dados['id'] = $chat['group_id'];
