@@ -20,7 +20,10 @@ class SendMessageJob extends BaseJob
     {
         try {
             if ($this->dados['url']) {
-                $this->sendMessageUrl();
+                $sendMessage = $this->sendMessageUrl();
+                if ($sendMessage['status'] == 'error') {
+                    return $sendMessage;
+                }
             }
         } catch (\Throwable $e) {
             logError($e);
@@ -64,11 +67,15 @@ class SendMessageJob extends BaseJob
 
             $data = json_decode($response, true);
             if($data['message']){
-                throw new \Exception($data['message']);
+                return array(
+                    'status' => 'error',
+                    'message' => $data['message'] ?? null
+                );
             }
             /* echo $response; */
         } catch (\Throwable $e) {
             logError($e);
+            throw $e;
         }
     }
 }
