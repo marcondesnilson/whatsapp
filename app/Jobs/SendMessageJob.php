@@ -39,6 +39,8 @@ class SendMessageJob extends BaseJob
                 'caption' => $this->dados['message'],
                 'isGroup' => $this->dados['isGroup'],
             ];
+
+            Log::info('body: ' . json_encode($body));
             curl_setopt_array($curl, array(
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
@@ -57,7 +59,13 @@ class SendMessageJob extends BaseJob
 
             $response = curl_exec($curl);
             Log::info($response);
+
             curl_close($curl);
+
+            $data = json_decode($response, true);
+            if($data['message']){
+                throw new \Exception($data['message']);
+            }
             /* echo $response; */
         } catch (\Throwable $e) {
             logError($e);
