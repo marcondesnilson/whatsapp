@@ -25,8 +25,8 @@ class MessageController extends Controller
     {
         try {
             $dados = $request->all();
-            //Log::info('dados: ' . json_encode($request));
-            //Log::info('dados: ' . json_encode($dados));
+            Log::info('dados: ' . json_encode($request));
+            Log::info('dados: ' . json_encode($dados));
             $historyJobsUuid = app('App\Http\Controllers\util\HistoryJobsUtil')
                 ->create('SendMessageJob', $dados);
             SendMessageJob::dispatch($historyJobsUuid, $dados)
