@@ -90,7 +90,7 @@ class ClearChatJob extends BaseJob
 
             curl_close($curl);
             $data = json_decode($response, true);
-            if($data['status']  == 'Success'){
+            if($data['status'] ?? null == 'Success'){
                 return Chat::where('uuid', $this->dados['chat_uuid'])->update(['clean_at' => now()]);
             }
             else{
