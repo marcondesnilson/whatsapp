@@ -63,11 +63,12 @@ class SendMessageJob extends BaseJob
             ));
 
             $response = curl_exec($curl);
-            Log::info($response);
 
             curl_close($curl);
 
             $data = json_decode($response, true);
+
+            Log::info('Send Message: ' . json_encode($data));
             if ($data['status'] ?? null == 'Success') {
                 return true;
             } else {
