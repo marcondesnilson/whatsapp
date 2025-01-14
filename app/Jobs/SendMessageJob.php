@@ -63,7 +63,7 @@ class SendMessageJob extends BaseJob
             ));
 
             $response = curl_exec($curl);
-            //Log::info($response);
+            Log::info($response);
 
             curl_close($curl);
 
