@@ -68,7 +68,7 @@ class SendMessageJob extends BaseJob
             curl_close($curl);
 
             $data = json_decode($response, true);
-            if ($data['status']  == 'Success') {
+            if ($data['status'] ?? null == 'Success') {
                 return true;
             } else {
                 return array(
