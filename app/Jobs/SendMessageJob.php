@@ -68,7 +68,7 @@ class SendMessageJob extends BaseJob
 
             $data = json_decode($response, true);
 
-            Log::info('Send Message: ' . json_encode($data));
+            Log::info('Send Message: ' . $data);
             if ($data['status'] ?? null == 'Success') {
                 return true;
             } else {
