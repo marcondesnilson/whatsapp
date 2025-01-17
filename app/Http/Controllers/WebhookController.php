@@ -15,13 +15,13 @@ class WebhookController extends Controller
     {
         try {
             //if onmessage ou onpresencechanged
-            if ($request->input('event') == 'onmessage' || $request->input('event') == 'onpresencechanged') {
+            /* if ($request->input('event') == 'onmessage' || $request->input('event') == 'onpresencechanged') {
                 $dados = $request->all();
                 $historyJobsUuid = app('App\Http\Controllers\util\HistoryJobsUtil')
                     ->create('WebhookInSaveJob', $dados);
                 WebhookInSaveJob::dispatch($historyJobsUuid, $dados)
                     ->onQueue('WebhookInSaveJob');
-            }
+            } */
             switch ($request->input('event')) {
                 case 'onmessage':
                     $this->onMessage($request);

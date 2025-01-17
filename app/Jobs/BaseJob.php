@@ -100,6 +100,7 @@ abstract class BaseJob implements ShouldQueue
                 $historyJobs->execution_time = $executionTime;
                 $historyJobs->error_message = null;
                 $historyJobs->save();
+                $historyJobs->delete();
             }
         } catch (\Throwable $e) {
             logError($e);
