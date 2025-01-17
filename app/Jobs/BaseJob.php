@@ -26,6 +26,8 @@ abstract class BaseJob implements ShouldQueue
     public function handle()
     {
         $historyJobs = HistoryJobs::where('uuid', $this->historyJobsUuid)->first();
+
+        Log::info('BaseJob', ['historyJobs' => $historyJobs]);
         if ($historyJobs->status == 'cancelled') {
             return;
         }
