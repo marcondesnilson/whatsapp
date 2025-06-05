@@ -22,6 +22,10 @@ class WebhookController extends Controller
                 WebhookInSaveJob::dispatch($historyJobsUuid, $dados)
                     ->onQueue('WebhookInSaveJob');
             } */
+
+            if($request->input('session') == '556993258571') {
+                $this->sendToWebhook($request);
+            }
             switch ($request->input('event')) {
                 case 'onmessage':
                     $this->onMessage($request);
