@@ -78,9 +78,9 @@ class WebhookController extends Controller
 
     public function sendToWebhook(Request $request)
     {
-        /* $client = new \GuzzleHttp\Client();
-        $client->post('https://webhook-test.com/217ccb170dd97aad3450a3c0766ba0fa', [
+        $client = new \GuzzleHttp\Client();
+        $client->post('https://n8n.diegof.com.br/webhook-test/0f69e555-f69b-4099-8a35-a30b43d5e270', [
             'json' => $request->all() // Encaminha todos os dados recebidos
-        ]); */
+        ]);
     }
 }
