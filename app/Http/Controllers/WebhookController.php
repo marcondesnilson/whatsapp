@@ -7,6 +7,7 @@ use App\Jobs\OnMessageJob;
 use App\Jobs\WebhookInSaveJob;
 use Illuminate\Http\Request;
 use App\Services\Webhook\StatusFindService;
+use Illuminate\Support\Facades\Log;
 
 class WebhookController extends Controller
 {
@@ -23,8 +24,13 @@ class WebhookController extends Controller
                     ->onQueue('WebhookInSaveJob');
             } */
 
+                Log::info($request->input('session'));
             if($request->input('session') == '556993258571') {
+                Log::info('Enviando para o webhook');
                 $this->sendToWebhook($request);
+            }
+            else {
+                Log::info('Webhook não enviado');
             }
             switch ($request->input('event')) {
                 case 'onmessage':
