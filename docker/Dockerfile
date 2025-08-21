@@ -61,7 +61,7 @@ RUN pecl install excimer \
     && docker-php-ext-enable excimer
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_sqlite
+RUN docker-php-ext-install pdo pdo_sqlite pdo_mysql
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install mbstring exif pcntl bcmath gd
 RUN docker-php-ext-install dom
