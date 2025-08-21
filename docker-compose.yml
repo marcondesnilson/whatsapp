@@ -22,27 +22,10 @@ services:
     container_name: whatsapp_webserver
     restart: unless-stopped
     ports:
-      - 8001:80
+      - 8002:80
     volumes:
       - ./:/var/www
       - ./docker/nginx/:/etc/nginx/conf.d/
-    networks:
-      - whatsapp_network
-
-  whatsapp_mysql:
-    image: 'mysql:latest'
-    container_name: whatsapp_mysql
-    restart: unless-stopped
-    ports:
-      - '3307:3306'
-    environment:
-      MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_DATABASE: 'whatsapp'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      MYSQL_OPTIONS: "--sort-buffer-size=1024M"  # Ajuste conforme necessário
-    volumes:
-      - './.docker/mysql:/var/lib/mysql'
-      - ./docker/mysql/my_custom.cnf:/etc/mysql/conf.d/my_custom.cnf
     networks:
       - whatsapp_network
 
